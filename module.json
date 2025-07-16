@@ -1,0 +1,573 @@
+{
+    "name": "example_module",
+    "title": "Example Module",
+    "description": "A comprehensive example module demonstrating PhPstrap module development best practices including forms, widgets, AJAX, validation, file uploads, and modern frontend features.",
+    "version": "1.0.0",
+    "required_version": "1.0.0",
+    "min_php_version": "8.0",
+    "max_php_version": "8.3",
+    "author": "PhPstrap Team",
+    "author_email": "dev@PhPstrap.com",
+    "author_url": "https://PhPstrap.com",
+    "license": "MIT",
+    "license_url": "https://opensource.org/licenses/MIT",
+    "namespace": "PhPstrap\\Modules\\Example",
+    "install_path": "modules/example_module",
+    "main_class": "ExampleModule",
+    "priority": 10,
+    "load_order": "normal",
+    "is_core": false,
+    "is_commercial": false,
+    "is_premium": false,
+    "price": 0.00,
+    "currency": "USD",
+    "update_server": null,
+    "documentation_url": "https://PhPstrap.com/docs/modules/example",
+    "support_url": "https://PhPstrap.com/support",
+    "repository_url": "https://github.com/PhPstrap/example-module",
+    "demo_url": "https://demo.PhPstrap.com/modules/example",
+    "category": "content",
+    "subcategory": "forms",
+    "compatibility": {
+        "wordpress": false,
+        "drupal": false,
+        "laravel": true,
+        "symfony": true,
+        "standalone": true
+    },
+    "dependencies": [],
+    "suggests": [
+        "mail_module",
+        "user_management",
+        "file_manager"
+    ],
+    "conflicts": [],
+    "replaces": [],
+    "provides": [
+        "form_builder",
+        "content_manager",
+        "widget_system"
+    ],
+    "permissions": [
+        {
+            "name": "example_module_view",
+            "title": "View Example Module",
+            "description": "Allows users to view example module content and widgets",
+            "default_roles": ["user", "subscriber", "editor", "admin"],
+            "scope": "frontend"
+        },
+        {
+            "name": "example_module_submit",
+            "title": "Submit Content",
+            "description": "Allows users to submit content through example module forms",
+            "default_roles": ["user", "subscriber", "editor", "admin"],
+            "scope": "frontend"
+        },
+        {
+            "name": "example_module_admin",
+            "title": "Administer Example Module",
+            "description": "Full administrative access to example module features",
+            "default_roles": ["admin"],
+            "scope": "backend"
+        },
+        {
+            "name": "example_module_settings",
+            "title": "Manage Settings",
+            "description": "Modify example module configuration and settings",
+            "default_roles": ["admin"],
+            "scope": "backend"
+        },
+        {
+            "name": "example_module_manage_data",
+            "title": "Manage Data",
+            "description": "Create, edit, and moderate example module content",
+            "default_roles": ["editor", "admin"],
+            "scope": "backend"
+        },
+        {
+            "name": "example_module_delete_data",
+            "title": "Delete Data",
+            "description": "Delete example module content and submissions",
+            "default_roles": ["admin"],
+            "scope": "backend"
+        }
+    ],
+    "hooks": {
+        "actions": [
+            {
+                "name": "example_module_init",
+                "description": "Triggered when the module is initialized",
+                "parameters": ["module_instance"]
+            },
+            {
+                "name": "example_module_loaded",
+                "description": "Triggered after module settings are loaded",
+                "parameters": ["settings"]
+            },
+            {
+                "name": "example_module_display",
+                "description": "Triggered when displaying module widgets",
+                "parameters": ["attributes"]
+            },
+            {
+                "name": "example_module_save_data",
+                "description": "Triggered when saving module data",
+                "parameters": ["data"]
+            },
+            {
+                "name": "example_module_data_saved",
+                "description": "Triggered after data is successfully saved",
+                "parameters": ["data_id", "data"]
+            },
+            {
+                "name": "example_module_settings_updated",
+                "description": "Triggered when module settings are updated",
+                "parameters": ["new_settings", "old_settings"]
+            },
+            {
+                "name": "example_module_before_uninstall",
+                "description": "Triggered before module uninstallation",
+                "parameters": ["uninstall_options"]
+            },
+            {
+                "name": "example_module_after_uninstall",
+                "description": "Triggered after module uninstallation",
+                "parameters": ["uninstall_options"]
+            },
+            {
+                "name": "example_module_form_success",
+                "description": "Triggered after successful form submission",
+                "parameters": ["form_data", "submission_id"]
+            },
+            {
+                "name": "example_module_deactivating",
+                "description": "Triggered when module is being deactivated",
+                "parameters": []
+            }
+        ],
+        "filters": [
+            {
+                "name": "example_module_content",
+                "description": "Filter module content before display",
+                "parameters": ["content", "context"]
+            },
+            {
+                "name": "example_module_settings",
+                "description": "Filter module settings",
+                "parameters": ["settings"]
+            },
+            {
+                "name": "example_module_validate",
+                "description": "Filter form validation results",
+                "parameters": ["validation_result", "form_data"]
+            },
+            {
+                "name": "example_module_form_fields",
+                "description": "Filter available form fields",
+                "parameters": ["fields", "form_type"]
+            },
+            {
+                "name": "example_module_widget_output",
+                "description": "Filter widget output before rendering",
+                "parameters": ["output", "widget_type", "attributes"]
+            }
+        ]
+    },
+    "shortcodes": [
+        {
+            "name": "example_widget",
+            "description": "Display an example module widget",
+            "attributes": {
+                "title": {
+                    "type": "string",
+                    "default": "Welcome!",
+                    "description": "Widget title"
+                },
+                "style": {
+                    "type": "string",
+                    "default": "default",
+                    "options": ["default", "minimal", "fancy"],
+                    "description": "Widget display style"
+                },
+                "show_date": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Show current date"
+                }
+            },
+            "example": "[example_widget title=\"My Widget\" style=\"fancy\" show_date=\"false\"]"
+        },
+        {
+            "name": "example_data",
+            "description": "Display example module data",
+            "attributes": {
+                "type": {
+                    "type": "string",
+                    "default": "latest",
+                    "options": ["latest", "tutorial", "news", "general"],
+                    "description": "Type of data to display"
+                },
+                "limit": {
+                    "type": "integer",
+                    "default": 10,
+                    "min": 1,
+                    "max": 50,
+                    "description": "Number of items to display"
+                }
+            },
+            "example": "[example_data type=\"tutorial\" limit=\"5\"]"
+        },
+        {
+            "name": "example_form",
+            "description": "Display example module form",
+            "attributes": {
+                "id": {
+                    "type": "string",
+                    "default": "example-form",
+                    "description": "Form ID attribute"
+                },
+                "class": {
+                    "type": "string",
+                    "default": "example-module-form",
+                    "description": "Form CSS class"
+                }
+            },
+            "example": "[example_form id=\"my-form\" class=\"custom-form\"]"
+        }
+    ],
+    "widgets": [
+        {
+            "name": "example_content_widget",
+            "title": "Example Content Widget",
+            "description": "Display example module content in widget areas",
+            "supports": ["sidebar", "footer", "header"],
+            "settings": {
+                "title": {
+                    "type": "string",
+                    "default": "Latest Content"
+                },
+                "content_type": {
+                    "type": "select",
+                    "options": ["latest", "popular", "featured"],
+                    "default": "latest"
+                },
+                "show_count": {
+                    "type": "integer",
+                    "default": 5,
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        }
+    ],
+    "menu_items": [
+        {
+            "title": "Example Module",
+            "slug": "example_module",
+            "icon": "fas fa-star",
+            "capability": "example_module_admin",
+            "position": 25,
+            "submenu": [
+                {
+                    "title": "Dashboard",
+                    "slug": "example_module_dashboard",
+                    "capability": "example_module_view"
+                },
+                {
+                    "title": "Manage Content",
+                    "slug": "example_module_content",
+                    "capability": "example_module_manage_data"
+                },
+                {
+                    "title": "Submissions",
+                    "slug": "example_module_submissions",
+                    "capability": "example_module_admin"
+                },
+                {
+                    "title": "Settings",
+                    "slug": "example_module_settings",
+                    "capability": "example_module_settings"
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "enabled": true,
+        "welcome_title": "Welcome to Example Module!",
+        "welcome_message": "This is a demonstration of PhPstrap module capabilities.",
+        "show_date": true,
+        "widget_style": "default",
+        "cache_duration": 3600,
+        "admin_notifications": true,
+        "notification_email": "",
+        "max_items": 10,
+        "max_content_length": 2000,
+        "allow_uploads": false,
+        "max_upload_size": 5242880,
+        "allowed_file_types": ["jpg", "jpeg", "png", "gif", "pdf"],
+        "enable_captcha": true,
+        "rate_limit": 5,
+        "rate_limit_window": 3600,
+        "debug_mode": false
+    },
+    "settings_sections": {
+        "general": {
+            "title": "General Settings",
+            "description": "Basic module configuration options",
+            "icon": "fas fa-cog",
+            "order": 1
+        },
+        "display": {
+            "title": "Display Options",
+            "description": "Customize how content is displayed",
+            "icon": "fas fa-eye",
+            "order": 2
+        },
+        "notifications": {
+            "title": "Notifications",
+            "description": "Email and alert configuration",
+            "icon": "fas fa-bell",
+            "order": 3
+        },
+        "uploads": {
+            "title": "File Uploads",
+            "description": "File upload settings and restrictions",
+            "icon": "fas fa-upload",
+            "order": 4
+        },
+        "security": {
+            "title": "Security",
+            "description": "Security and spam protection settings",
+            "icon": "fas fa-shield-alt",
+            "order": 5
+        },
+        "limits": {
+            "title": "Limits",
+            "description": "Data and content limitations",
+            "icon": "fas fa-chart-bar",
+            "order": 6
+        },
+        "performance": {
+            "title": "Performance",
+            "description": "Caching and optimization settings",
+            "icon": "fas fa-tachometer-alt",
+            "order": 7
+        },
+        "development": {
+            "title": "Development",
+            "description": "Development and debugging options",
+            "icon": "fas fa-code",
+            "order": 8
+        }
+    },
+    "database_tables": [
+        {
+            "name": "example_module_data",
+            "description": "Stores main module content and submissions",
+            "engine": "InnoDB",
+            "charset": "utf8mb4"
+        },
+        {
+            "name": "example_module_cache",
+            "description": "Caching table for improved performance",
+            "engine": "InnoDB",
+            "charset": "utf8mb4"
+        },
+        {
+            "name": "example_module_audit",
+            "description": "Audit log for tracking module usage",
+            "engine": "InnoDB",
+            "charset": "utf8mb4"
+        }
+    ],
+    "assets": {
+        "css": [
+            {
+                "file": "assets/example-module.css",
+                "load_on": ["frontend", "admin"],
+                "dependencies": [],
+                "version": "1.0.0",
+                "media": "all"
+            }
+        ],
+        "js": [
+            {
+                "file": "assets/example-module.js",
+                "load_on": ["frontend"],
+                "dependencies": [],
+                "version": "1.0.0",
+                "in_footer": true
+            }
+        ],
+        "images": [
+            "assets/icon.png",
+            "assets/banner.jpg",
+            "assets/screenshot1.png",
+            "assets/screenshot2.png"
+        ]
+    },
+    "api_endpoints": [
+        {
+            "method": "POST",
+            "endpoint": "/api/example-module/submit",
+            "description": "Submit form data via API",
+            "requires_auth": false,
+            "rate_limited": true
+        },
+        {
+            "method": "GET",
+            "endpoint": "/api/example-module/data",
+            "description": "Retrieve module data",
+            "requires_auth": false,
+            "rate_limited": true
+        },
+        {
+            "method": "GET",
+            "endpoint": "/api/example-module/stats",
+            "description": "Get module statistics",
+            "requires_auth": true,
+            "capability": "example_module_admin"
+        }
+    ],
+    "cron_jobs": [
+        {
+            "name": "example_module_cleanup",
+            "description": "Clean up old data and cache entries",
+            "schedule": "daily",
+            "callback": "cleanup"
+        },
+        {
+            "name": "example_module_stats",
+            "description": "Generate daily statistics",
+            "schedule": "daily",
+            "callback": "generateStats"
+        }
+    ],
+    "tags": [
+        "example",
+        "demo",
+        "tutorial",
+        "development",
+        "forms",
+        "widgets",
+        "content",
+        "ajax",
+        "responsive",
+        "modern"
+    ],
+    "keywords": [
+        "PhPstrap",
+        "module",
+        "example",
+        "form builder",
+        "content management",
+        "widgets",
+        "ajax forms",
+        "file upload",
+        "validation"
+    ],
+    "screenshots": [
+        {
+            "file": "assets/screenshot1.png",
+            "title": "Form Interface",
+            "description": "Modern, responsive form with validation"
+        },
+        {
+            "file": "assets/screenshot2.png",
+            "title": "Widget Display",
+            "description": "Customizable widget with multiple style options"
+        },
+        {
+            "file": "assets/screenshot3.png",
+            "title": "Admin Panel",
+            "description": "Comprehensive administration interface"
+        }
+    ],
+    "installation": {
+        "auto_install": true,
+        "create_tables": true,
+        "run_migrations": true,
+        "create_sample_data": false,
+        "setup_permissions": true,
+        "clear_cache": true
+    },
+    "uninstallation": {
+        "remove_tables": false,
+        "remove_files": false,
+        "remove_settings": true,
+        "create_backup": true,
+        "cleanup_cache": true
+    },
+    "update": {
+        "check_compatibility": true,
+        "backup_before_update": true,
+        "run_migrations": true,
+        "clear_cache_after": true
+    },
+    "testing": {
+        "has_unit_tests": true,
+        "has_integration_tests": true,
+        "test_coverage": 85,
+        "phpunit_config": "phpunit.xml"
+    },
+    "localization": {
+        "text_domain": "example-module",
+        "supported_languages": ["en", "es", "fr", "de", "it"],
+        "translation_files": [
+            "languages/example-module-en.po",
+            "languages/example-module-es.po",
+            "languages/example-module-fr.po"
+        ]
+    },
+    "changelog": {
+        "1.0.0": {
+            "date": "2025-07-13",
+            "changes": [
+                "Initial release with comprehensive example functionality",
+                "Modern responsive form with AJAX submission",
+                "File upload with drag & drop support",
+                "Real-time validation and character counting",
+                "Widget system with multiple display styles",
+                "Admin interface with statistics dashboard",
+                "Complete API endpoints for external integration",
+                "Comprehensive documentation and examples"
+            ],
+            "breaking_changes": [],
+            "security_fixes": [],
+            "bug_fixes": [],
+            "deprecations": []
+        }
+    },
+    "roadmap": {
+        "1.1.0": [
+            "Advanced form builder with drag & drop",
+            "Integration with popular email services",
+            "Enhanced widget customization options"
+        ],
+        "1.2.0": [
+            "Multi-step form support",
+            "Advanced data visualization",
+            "Import/export functionality"
+        ],
+        "2.0.0": [
+            "Complete UI redesign",
+            "GraphQL API support",
+            "Advanced workflow management"
+        ]
+    },
+    "support": {
+        "documentation": "https://PhPstrap.com/docs/modules/example",
+        "tutorials": "https://PhPstrap.com/tutorials/example-module",
+        "forum": "https://forum.PhPstrap.com/modules/example",
+        "issues": "https://github.com/PhPstrap/example-module/issues",
+        "email": "support@PhPstrap.com"
+    },
+    "metadata": {
+        "created_at": "2025-07-13T00:00:00Z",
+        "updated_at": "2025-07-13T00:00:00Z",
+        "downloads": 0,
+        "rating": 0,
+        "reviews": 0,
+        "compatibility_tested": "1.0.0"
+    }
+}

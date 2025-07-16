@@ -1,0 +1,975 @@
+/**
+ * Example Module Styles
+ * 
+ * This CSS file demonstrates professional styling for PhPstrap modules.
+ * It includes:
+ * - Form styling with modern design
+ * - Responsive layouts
+ * - Accessibility features
+ * - Loading states and animations
+ * - Widget and content display styles
+ */
+
+/* =============================================================================
+   CSS Variables for Consistent Theming
+   ============================================================================= */
+:root {
+    /* Colors */
+    --em-primary: #2563eb;
+    --em-primary-hover: #1d4ed8;
+    --em-primary-light: #dbeafe;
+    --em-secondary: #64748b;
+    --em-success: #059669;
+    --em-warning: #d97706;
+    --em-error: #dc2626;
+    --em-info: #0891b2;
+    
+    /* Neutral Colors */
+    --em-gray-50: #f8fafc;
+    --em-gray-100: #f1f5f9;
+    --em-gray-200: #e2e8f0;
+    --em-gray-300: #cbd5e1;
+    --em-gray-400: #94a3b8;
+    --em-gray-500: #64748b;
+    --em-gray-600: #475569;
+    --em-gray-700: #334155;
+    --em-gray-800: #1e293b;
+    --em-gray-900: #0f172a;
+    
+    /* Typography */
+    --em-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --em-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    
+    /* Spacing */
+    --em-space-1: 0.25rem;
+    --em-space-2: 0.5rem;
+    --em-space-3: 0.75rem;
+    --em-space-4: 1rem;
+    --em-space-5: 1.25rem;
+    --em-space-6: 1.5rem;
+    --em-space-8: 2rem;
+    --em-space-10: 2.5rem;
+    --em-space-12: 3rem;
+    
+    /* Border Radius */
+    --em-radius-sm: 0.125rem;
+    --em-radius: 0.25rem;
+    --em-radius-md: 0.375rem;
+    --em-radius-lg: 0.5rem;
+    --em-radius-xl: 0.75rem;
+    
+    /* Shadows */
+    --em-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --em-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --em-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --em-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    
+    /* Transitions */
+    --em-transition-fast: 150ms ease-in-out;
+    --em-transition: 200ms ease-in-out;
+    --em-transition-slow: 300ms ease-in-out;
+}
+
+/* =============================================================================
+   Base Module Styles
+   ============================================================================= */
+
+.example-module-form,
+.example-module-widget,
+.example-module-data {
+    font-family: var(--em-font-sans);
+    line-height: 1.6;
+    color: var(--em-gray-800);
+}
+
+/* =============================================================================
+   Form Container Styles
+   ============================================================================= */
+
+.example-module-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: var(--em-radius-lg);
+    box-shadow: var(--em-shadow-lg);
+    overflow: hidden;
+}
+
+.example-module-form-element {
+    padding: var(--em-space-8);
+}
+
+/* Form Header */
+.form-header {
+    margin-bottom: var(--em-space-8);
+    text-align: center;
+    border-bottom: 1px solid var(--em-gray-200);
+    padding-bottom: var(--em-space-6);
+}
+
+.form-header h3 {
+    margin: 0 0 var(--em-space-4) 0;
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--em-gray-900);
+}
+
+.form-description {
+    margin: 0;
+    font-size: 1.125rem;
+    color: var(--em-gray-600);
+}
+
+/* Form Body */
+.form-body {
+    margin-bottom: var(--em-space-8);
+}
+
+/* =============================================================================
+   Form Groups and Fields
+   ============================================================================= */
+
+.form-group {
+    margin-bottom: var(--em-space-6);
+}
+
+.form-group.has-error .form-control {
+    border-color: var(--em-error);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-group.has-error .form-label {
+    color: var(--em-error);
+}
+
+/* Labels */
+.form-label {
+    display: block;
+    margin-bottom: var(--em-space-2);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--em-gray-700);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.form-label .required {
+    color: var(--em-error);
+    margin-left: var(--em-space-1);
+}
+
+/* Form Controls */
+.form-control {
+    display: block;
+    width: 100%;
+    padding: var(--em-space-3) var(--em-space-4);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--em-gray-900);
+    background-color: white;
+    background-clip: padding-box;
+    border: 1px solid var(--em-gray-300);
+    border-radius: var(--em-radius-md);
+    transition: border-color var(--em-transition), box-shadow var(--em-transition);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--em-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-control::placeholder {
+    color: var(--em-gray-400);
+    opacity: 1;
+}
+
+.form-control:disabled {
+    background-color: var(--em-gray-50);
+    border-color: var(--em-gray-200);
+    color: var(--em-gray-500);
+    cursor: not-allowed;
+}
+
+/* Textarea specific */
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Select specific */
+select.form-control {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right var(--em-space-2) center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: var(--em-space-8);
+}
+
+/* File input */
+input[type="file"].form-control {
+    padding: var(--em-space-2);
+    border: 2px dashed var(--em-gray-300);
+    background-color: var(--em-gray-50);
+}
+
+input[type="file"].form-control:hover {
+    border-color: var(--em-primary);
+    background-color: var(--em-primary-light);
+}
+
+/* =============================================================================
+   Radio and Checkbox Styles
+   ============================================================================= */
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--em-space-3);
+}
+
+.radio-label,
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--em-space-3);
+    cursor: pointer;
+    padding: var(--em-space-3);
+    border-radius: var(--em-radius-md);
+    transition: background-color var(--em-transition);
+}
+
+.radio-label:hover,
+.checkbox-label:hover {
+    background-color: var(--em-gray-50);
+}
+
+.radio-label input[type="radio"],
+.checkbox-label input[type="checkbox"] {
+    margin: 0;
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+}
+
+.radio-label span:first-of-type,
+.checkbox-label span:first-of-type {
+    font-weight: 500;
+    color: var(--em-gray-900);
+}
+
+.radio-label small,
+.checkbox-label small {
+    display: block;
+    margin-top: var(--em-space-1);
+    color: var(--em-gray-600);
+    font-size: 0.875rem;
+}
+
+/* Fieldset */
+fieldset {
+    border: 1px solid var(--em-gray-200);
+    border-radius: var(--em-radius-md);
+    padding: var(--em-space-4);
+    margin: 0;
+}
+
+fieldset legend {
+    padding: 0 var(--em-space-2);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--em-gray-700);
+}
+
+/* =============================================================================
+   Help Text and Validation
+   ============================================================================= */
+
+.form-help {
+    display: block;
+    margin-top: var(--em-space-2);
+    font-size: 0.875rem;
+    color: var(--em-gray-600);
+}
+
+.form-help-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--em-space-2);
+}
+
+.character-counter {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--em-gray-500);
+}
+
+.error-message {
+    display: block;
+    margin-top: var(--em-space-2);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--em-error);
+}
+
+/* =============================================================================
+   Alert Messages
+   ============================================================================= */
+
+.example-module-success,
+.example-module-errors {
+    margin-bottom: var(--em-space-6);
+    padding: var(--em-space-4);
+    border-radius: var(--em-radius-md);
+    border-left: 4px solid;
+}
+
+.example-module-success {
+    background-color: #ecfdf5;
+    border-left-color: var(--em-success);
+    color: #065f46;
+}
+
+.example-module-success strong {
+    color: #047857;
+}
+
+.example-module-errors {
+    background-color: #fef2f2;
+    border-left-color: var(--em-error);
+    color: #991b1b;
+}
+
+.example-module-errors strong {
+    color: #dc2626;
+}
+
+.example-module-errors ul {
+    margin: var(--em-space-2) 0 0 0;
+    padding-left: var(--em-space-5);
+}
+
+.example-module-errors li {
+    margin-bottom: var(--em-space-1);
+}
+
+/* =============================================================================
+   Form Footer and Buttons
+   ============================================================================= */
+
+.form-footer {
+    border-top: 1px solid var(--em-gray-200);
+    padding-top: var(--em-space-6);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--em-space-4);
+    margin-bottom: var(--em-space-4);
+}
+
+.form-info {
+    padding: var(--em-space-4);
+    background-color: var(--em-gray-50);
+    border-radius: var(--em-radius-md);
+    border: 1px solid var(--em-gray-200);
+}
+
+.form-info small {
+    font-size: 0.875rem;
+    color: var(--em-gray-600);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--em-space-2);
+    padding: var(--em-space-3) var(--em-space-6);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: var(--em-radius-md);
+    cursor: pointer;
+    transition: all var(--em-transition);
+    min-height: 2.5rem;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.btn-primary {
+    background-color: var(--em-primary);
+    border-color: var(--em-primary);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--em-primary-hover);
+    border-color: var(--em-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--em-shadow-md);
+}
+
+.btn-secondary {
+    background-color: white;
+    border-color: var(--em-gray-300);
+    color: var(--em-gray-700);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: var(--em-gray-50);
+    border-color: var(--em-gray-400);
+}
+
+/* Loading spinner */
+.spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* =============================================================================
+   Widget Styles
+   ============================================================================= */
+
+.example-module-widget {
+    background: white;
+    border: 1px solid var(--em-gray-200);
+    border-radius: var(--em-radius-lg);
+    padding: var(--em-space-6);
+    margin-bottom: var(--em-space-6);
+    box-shadow: var(--em-shadow-sm);
+}
+
+.example-module-widget h3 {
+    margin: 0 0 var(--em-space-4) 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--em-gray-900);
+}
+
+.example-module-widget p {
+    margin: 0 0 var(--em-space-4) 0;
+    color: var(--em-gray-600);
+}
+
+.example-module-widget.minimal {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    padding: var(--em-space-4);
+}
+
+.example-module-widget.fancy {
+    background: linear-gradient(135deg, var(--em-primary-light) 0%, white 100%);
+    border: 2px solid var(--em-primary);
+    box-shadow: var(--em-shadow-lg);
+}
+
+/* =============================================================================
+   Data Display Styles
+   ============================================================================= */
+
+.example-module-data {
+    margin: var(--em-space-6) 0;
+}
+
+.data-item {
+    background: white;
+    border: 1px solid var(--em-gray-200);
+    border-radius: var(--em-radius-md);
+    padding: var(--em-space-5);
+    margin-bottom: var(--em-space-4);
+    transition: all var(--em-transition);
+}
+
+.data-item:hover {
+    border-color: var(--em-primary);
+    box-shadow: var(--em-shadow-md);
+    transform: translateY(-2px);
+}
+
+.data-item h4 {
+    margin: 0 0 var(--em-space-3) 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--em-gray-900);
+}
+
+.data-item p {
+    margin: 0 0 var(--em-space-3) 0;
+    color: var(--em-gray-600);
+    line-height: 1.6;
+}
+
+.data-item small {
+    font-size: 0.875rem;
+    color: var(--em-gray-500);
+}
+
+.data-item .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--em-space-4);
+    padding-top: var(--em-space-3);
+    border-top: 1px solid var(--em-gray-100);
+}
+
+.data-item .tags {
+    display: flex;
+    gap: var(--em-space-2);
+}
+
+.data-item .tag {
+    display: inline-block;
+    padding: var(--em-space-1) var(--em-space-2);
+    background-color: var(--em-gray-100);
+    color: var(--em-gray-700);
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: var(--em-radius);
+}
+
+/* =============================================================================
+   File Upload Enhancement Styles
+   ============================================================================= */
+
+.file-upload-wrapper {
+    position: relative;
+}
+
+.file-drop-zone {
+    border: 2px dashed var(--em-gray-300);
+    border-radius: var(--em-radius-md);
+    padding: var(--em-space-8);
+    text-align: center;
+    background-color: var(--em-gray-50);
+    cursor: pointer;
+    transition: all var(--em-transition);
+    margin-bottom: var(--em-space-4);
+}
+
+.file-drop-zone:hover,
+.file-drop-zone.drag-over {
+    border-color: var(--em-primary);
+    background-color: var(--em-primary-light);
+}
+
+.drop-zone-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--em-space-2);
+}
+
+.drop-icon {
+    font-size: 2rem;
+    opacity: 0.6;
+}
+
+.drop-text {
+    font-weight: 500;
+    color: var(--em-gray-700);
+}
+
+.drop-hint {
+    font-size: 0.875rem;
+    color: var(--em-gray-500);
+}
+
+.file-info {
+    margin-top: var(--em-space-2);
+}
+
+.file-selected {
+    display: flex;
+    align-items: center;
+    gap: var(--em-space-3);
+    padding: var(--em-space-3);
+    background-color: var(--em-gray-50);
+    border-radius: var(--em-radius-md);
+    border: 1px solid var(--em-gray-200);
+}
+
+.file-name {
+    font-weight: 500;
+    color: var(--em-gray-900);
+    flex: 1;
+}
+
+.file-size {
+    font-size: 0.875rem;
+    color: var(--em-gray-500);
+}
+
+.file-remove {
+    background: var(--em-error);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.file-error {
+    padding: var(--em-space-3);
+    background-color: #fef2f2;
+    border: 1px solid var(--em-error);
+    border-radius: var(--em-radius-md);
+    color: var(--em-error);
+}
+
+/* =============================================================================
+   Form Progress Indicator
+   ============================================================================= */
+
+.form-progress {
+    margin-top: var(--em-space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--em-space-3);
+}
+
+.progress-bar {
+    flex: 1;
+    height: 0.5rem;
+    background-color: var(--em-gray-200);
+    border-radius: var(--em-radius);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--em-primary);
+    border-radius: var(--em-radius);
+    transition: width var(--em-transition);
+    width: 0%;
+}
+
+.progress-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--em-gray-600);
+    white-space: nowrap;
+}
+
+/* =============================================================================
+   Data Search and Filter Styles
+   ============================================================================= */
+
+.data-search {
+    width: 100%;
+    padding: var(--em-space-3) var(--em-space-4);
+    margin-bottom: var(--em-space-4);
+    border: 1px solid var(--em-gray-300);
+    border-radius: var(--em-radius-md);
+    font-size: 1rem;
+    transition: border-color var(--em-transition);
+}
+
+.data-search:focus {
+    outline: none;
+    border-color: var(--em-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.data-sort {
+    padding: var(--em-space-2) var(--em-space-3);
+    margin-bottom: var(--em-space-4);
+    border: 1px solid var(--em-gray-300);
+    border-radius: var(--em-radius-md);
+    font-size: 0.875rem;
+    background-color: white;
+}
+
+.no-results {
+    text-align: center;
+    color: var(--em-gray-500);
+    padding: var(--em-space-8);
+    font-style: italic;
+}
+
+/* =============================================================================
+   Auto-save Notification
+   ============================================================================= */
+
+.auto-save-notification {
+    background: #e3f2fd;
+    border: 1px solid #1976d2;
+    border-radius: var(--em-radius-md);
+    padding: var(--em-space-3);
+    margin-bottom: var(--em-space-4);
+    color: #1565c0;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: var(--em-space-2);
+}
+
+/* =============================================================================
+   Animation Classes
+   ============================================================================= */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Loading states */
+.is-loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.is-loading .form-control {
+    background-color: var(--em-gray-50);
+}
+
+/* =============================================================================
+   Utility Classes
+   ============================================================================= */
+
+.honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #000;
+    color: #fff;
+    padding: var(--em-space-2);
+    text-decoration: none;
+    border-radius: var(--em-radius);
+    z-index: 1000;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* =============================================================================
+   Responsive Design
+   ============================================================================= */
+
+@media (max-width: 768px) {
+    .example-module-form {
+        margin: var(--em-space-4);
+        border-radius: var(--em-radius-md);
+    }
+    
+    .example-module-form-element {
+        padding: var(--em-space-6);
+    }
+    
+    .form-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .form-help-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--em-space-1);
+    }
+    
+    .radio-group {
+        gap: var(--em-space-2);
+    }
+    
+    .data-item .meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--em-space-2);
+    }
+    
+    .form-progress {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--em-space-2);
+    }
+    
+    .file-selected {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--em-space-2);
+    }
+}
+
+@media (max-width: 480px) {
+    .example-module-form {
+        margin: var(--em-space-2);
+    }
+    
+    .example-module-form-element {
+        padding: var(--em-space-4);
+    }
+    
+    .form-group {
+        margin-bottom: var(--em-space-4);
+    }
+    
+    .form-header {
+        margin-bottom: var(--em-space-6);
+        padding-bottom: var(--em-space-4);
+    }
+    
+    .form-footer {
+        padding-top: var(--em-space-4);
+    }
+    
+    .drop-zone-content {
+        gap: var(--em-space-1);
+    }
+    
+    .drop-icon {
+        font-size: 1.5rem;
+    }
+}
+
+/* =============================================================================
+   Dark Mode Support
+   ============================================================================= */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --em-gray-50: #0f172a;
+        --em-gray-100: #1e293b;
+        --em-gray-200: #334155;
+        --em-gray-300: #475569;
+        --em-gray-400: #64748b;
+        --em-gray-500: #94a3b8;
+        --em-gray-600: #cbd5e1;
+        --em-gray-700: #e2e8f0;
+        --em-gray-800: #f1f5f9;
+        --em-gray-900: #f8fafc;
+    }
+    
+    .example-module-form,
+    .example-module-widget,
+    .data-item {
+        background-color: var(--em-gray-100);
+        border-color: var(--em-gray-300);
+    }
+    
+    .form-control {
+        background-color: var(--em-gray-50);
+        border-color: var(--em-gray-300);
+        color: var(--em-gray-900);
+    }
+    
+    .form-control:focus {
+        background-color: var(--em-gray-100);
+    }
+    
+    .example-module-success {
+        background-color: rgba(5, 150, 105, 0.1);
+        color: #34d399;
+    }
+    
+    .example-module-errors {
+        background-color: rgba(220, 38, 38, 0.1);
+        color: #f87171;
+    }
+    
+    .file-drop-zone {
+        background-color: var(--em-gray-50);
+        border-color: var(--em-gray-300);
+    }
+    
+    .file-selected {
+        background-color: var(--em-gray-50);
+        border-color: var(--em-gray-300);
+    }
+}
+
+/* =============================================================================
+   Print Styles
+   ============================================================================= */
+
+@media print {
+    .example-module-form {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .form-actions,
+    .btn,
+    .file-drop-zone,
+    .progress-bar {
+        display: none;
+    }
+    
+    .form-control {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        border-radius: 0;
+        padding: var(--em-space-1) 0;
+    }
+    
+    .form-group {
+        page-break-inside: avoid;
+    }
+    
+    .data-item {
+        page-break-inside: avoid;
+        margin-bottom: var(--em-space-4);
+    }
+}
